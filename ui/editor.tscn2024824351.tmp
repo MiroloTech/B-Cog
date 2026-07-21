@@ -1,0 +1,225 @@
+[gd_scene format=3 uid="uid://4owbaowcrlpb"]
+
+[ext_resource type="Script" uid="uid://c8y3wlfehgsqv" path="res://ui/canvas_area.gd" id="1_d0bqo"]
+[ext_resource type="Script" uid="uid://bbems7xk5th8w" path="res://ui/scene_tree.gd" id="1_fx2qn"]
+[ext_resource type="Script" uid="uid://djvfh2vwm20ak" path="res://ui/timeline.gd" id="3_c55ig"]
+[ext_resource type="Script" uid="uid://vi4v050lbsdm" path="res://ui/inspector.gd" id="3_kb8m1"]
+[ext_resource type="Texture2D" uid="uid://bx1vpgvope6n0" path="res://assets/icons/PlayStart.svg" id="4_4x3iy"]
+[ext_resource type="Texture2D" uid="uid://v0f04yjx7os4" path="res://assets/icons/MainPlay.svg" id="4_c55ig"]
+[ext_resource type="Texture2D" uid="uid://ds2r81ip1x753" path="res://assets/icons/PlayTravel.svg" id="5_cwcei"]
+[ext_resource type="Script" uid="uid://cvr7p738nkhcx" path="res://ui/popup_manager.gd" id="8_qfej6"]
+
+[node name="Editor" type="Control" unique_id=1846843988]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="ColorRect" parent="." unique_id=1384688649]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.078431375, 0.078431375, 0.078431375, 1)
+
+[node name="ViewportSplit" type="HSplitContainer" parent="." unique_id=2041364095]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offsets = PackedInt32Array(300, -300)
+drag_nested_intersections = true
+split_offset = 300
+
+[node name="FileSystemSplit" type="VSplitContainer" parent="ViewportSplit" unique_id=1086089925]
+layout_mode = 2
+
+[node name="SceneTree" type="Panel" parent="ViewportSplit/FileSystemSplit" unique_id=1899462184]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("1_fx2qn")
+
+[node name="Tree" type="Tree" parent="ViewportSplit/FileSystemSplit/SceneTree" unique_id=1583562891]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+allow_search = false
+auto_tooltip = false
+scroll_horizontal_enabled = false
+
+[node name="FileSystem" type="Panel" parent="ViewportSplit/FileSystemSplit" unique_id=714370789]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Tree" type="Tree" parent="ViewportSplit/FileSystemSplit/FileSystem" unique_id=2021170401]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+allow_search = false
+auto_tooltip = false
+scroll_horizontal_enabled = false
+
+[node name="TimelineSplit" type="VSplitContainer" parent="ViewportSplit" unique_id=965331285]
+layout_mode = 2
+size_flags_horizontal = 3
+split_offsets = PackedInt32Array(746)
+split_offset = 746
+
+[node name="CanvasArea" type="ColorRect" parent="ViewportSplit/TimelineSplit" unique_id=102769657]
+clip_contents = true
+layout_mode = 2
+color = Color(0.16206557, 0.1620656, 0.16206554, 1)
+script = ExtResource("1_d0bqo")
+
+[node name="ViewportContainer" type="SubViewportContainer" parent="ViewportSplit/TimelineSplit/CanvasArea" unique_id=280082076]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="ToolMargin" type="MarginContainer" parent="ViewportSplit/TimelineSplit/CanvasArea" unique_id=274055576]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ToolContainer" type="HBoxContainer" parent="ViewportSplit/TimelineSplit/CanvasArea/ToolMargin" unique_id=853108888]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="ToolContainer" type="Node2D" parent="ViewportSplit/TimelineSplit/CanvasArea" unique_id=1090190868]
+top_level = true
+
+[node name="Timeline" type="Panel" parent="ViewportSplit/TimelineSplit" unique_id=748401700]
+clip_contents = true
+layout_mode = 2
+script = ExtResource("3_c55ig")
+
+[node name="ControlSplit" type="VBoxContainer" parent="ViewportSplit/TimelineSplit/Timeline" unique_id=652638588]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="Controls" type="HBoxContainer" parent="ViewportSplit/TimelineSplit/Timeline/ControlSplit" unique_id=1144551466]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+alignment = 1
+
+[node name="PlayStart" type="TextureButton" parent="ViewportSplit/TimelineSplit/Timeline/ControlSplit/Controls" unique_id=697672741]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+texture_normal = ExtResource("4_4x3iy")
+stretch_mode = 5
+
+[node name="PlayStartScene" type="TextureButton" parent="ViewportSplit/TimelineSplit/Timeline/ControlSplit/Controls" unique_id=1869962174]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+texture_normal = ExtResource("5_cwcei")
+stretch_mode = 5
+
+[node name="Play" type="TextureButton" parent="ViewportSplit/TimelineSplit/Timeline/ControlSplit/Controls" unique_id=1915990521]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+texture_normal = ExtResource("4_c55ig")
+stretch_mode = 5
+
+[node name="CaretContainer" type="Control" parent="ViewportSplit/TimelineSplit/Timeline/ControlSplit" unique_id=486861452]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+
+[node name="Caret" type="Button" parent="ViewportSplit/TimelineSplit/Timeline/ControlSplit/CaretContainer" unique_id=1002130260]
+custom_minimum_size = Vector2(50, 0)
+custom_maximum_size = Vector2(50, -1)
+propagate_maximum_size = true
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 28.0
+grow_vertical = 2
+
+[node name="CaretLine" type="ColorRect" parent="ViewportSplit/TimelineSplit/Timeline/ControlSplit/CaretContainer/Caret" unique_id=722341998]
+z_index = 2
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_bottom = 1000.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.5211406, 0.5211406, 0.5211405, 1)
+
+[node name="Tracks" type="VBoxContainer" parent="ViewportSplit/TimelineSplit/Timeline/ControlSplit" unique_id=1910025101]
+clip_contents = true
+layout_mode = 2
+
+[node name="Inspector" type="Panel" parent="ViewportSplit" unique_id=2000428105]
+layout_mode = 2
+script = ExtResource("3_kb8m1")
+animated_color = Color(0.4862745, 0.41568628, 0.96862745, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="ViewportSplit/Inspector" unique_id=149532782]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Controllers" type="VBoxContainer" parent="ViewportSplit/Inspector/MarginContainer" unique_id=718824596]
+layout_mode = 2
+
+[node name="PopupManager" type="Control" parent="." unique_id=952753939]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("8_qfej6")
+
+[node name="Darkening" type="ColorRect" parent="PopupManager" unique_id=311626703]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.39215687)
+
+[connection signal="item_selected" from="ViewportSplit/FileSystemSplit/SceneTree/Tree" to="ViewportSplit/FileSystemSplit/SceneTree" method="_on_tree_item_selected"]

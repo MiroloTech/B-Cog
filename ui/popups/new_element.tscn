@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://bynkyr5pp638c"]
+
+[ext_resource type="Script" uid="uid://bjvxxtmoyua5o" path="res://ui/popups/new_element.gd" id="1_eblrj"]
+
+[node name="NewElement" type="Window" unique_id=425976345]
+oversampling_override = 1.0
+title = "Add Element"
+position = Vector2i(0, 36)
+size = Vector2i(1200, 600)
+script = ExtResource("1_eblrj")
+
+[node name="Panel" type="Panel" parent="." unique_id=1566598860]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=1157798544]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Content" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=2079871983]
+layout_mode = 2
+
+[node name="Search" type="LineEdit" parent="Panel/MarginContainer/Content" unique_id=1809299157]
+layout_mode = 2
+placeholder_text = "Search for Elements"
+clear_button_enabled = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/Content" unique_id=148249309]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Tree" type="Tree" parent="Panel/MarginContainer/Content/ScrollContainer" unique_id=289766302]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+hide_root = true
+
+[node name="Actions" type="HBoxContainer" parent="Panel/MarginContainer/Content" unique_id=2059234535]
+layout_mode = 2
+
+[node name="Add" type="Button" parent="Panel/MarginContainer/Content/Actions" unique_id=143748366]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Add"
+
+[node name="Cancel" type="Button" parent="Panel/MarginContainer/Content/Actions" unique_id=658199614]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cancel"
+
+[connection signal="pressed" from="Panel/MarginContainer/Content/Actions/Add" to="." method="_on_add_pressed"]

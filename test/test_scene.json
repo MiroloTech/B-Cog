@@ -1,0 +1,66 @@
+{
+	"elements": [
+		{
+			"type": "ReferenceImage",
+			"name": "Reference",
+			"source": "D:/DATA/Games/animator/test/hands_sketch.png",
+			"offset": [0.0, 0.0],
+			"scale": [0.1, 0.1],
+			"components": [],
+			"children": []
+		},
+		{
+			"type": "Contour",
+			"name": "MainContour",
+			"width": 4,
+			"color": "#0b0b0b",
+			"points": [
+				[0,0,10,40,40,40,50,0],
+				[50,0,60,-40,90,-40,100,0],
+				[100,0,110,40,140,0,150,0],
+				[200,200,210,160,240,160,250,200],
+				[300,0,310,30,330,30,340,0],
+				[340,0,350,-30,370,-30,380,0],
+			],
+			"components": [
+				{
+					"type": "Fill",
+					"color": "#dd4433"
+				},
+			],
+			"children": []
+		}
+	],
+	"animation": {
+		"Reference:scale": [
+			{
+				"t": 0,
+				"v": [1.0, 1.0]
+			},
+			{
+				"t": 10,
+				"v": [3.0, 3.0]
+			}
+		],
+		"Reference:offset:x": [
+			{
+				"t": 10,
+				"v": 0.0
+			},
+			{
+				"t": 15,
+				"v": -50.0
+			}
+		],
+		"MainContour::Fill:color": [
+			{
+				"t": 0,
+				"v": "#ff0000"
+			},
+			{
+				"t": 24,
+				"v": "#00ff00"
+			}
+		]
+	}
+}

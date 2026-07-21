@@ -1,0 +1,24 @@
+# Essentials Roadmap
+
+### App Systems
+/ Saving a project
+/ Implement Components as children of their parent node
+- Creating & Editing Multiple Scenes
+/ Sort animated properties by object in timeline
+/ Adding / Removing / Moving Objects from/in Scene Tree
+/ Adding components to elements in Inspector
+- Audio (New Panel)
+- Make keyframes in Timeline moveable / deletable
+
+### App features
+- Contour draw / delete tool
+- Contour Fill Component
+- 3D Shapes
+- Outline Component for 3D Shapes
+- Drawable image (storyboard)
+
+### Fixes
+/ Fix bug, where caret jumps seconds in between two visual times
+/ Fix bug, where animating a component property creates a new track
+- Fix zooming in / out from preview offsetting your entire view
+/ Fix deleting element not taking animation tracks from it's children (mainly components) with it

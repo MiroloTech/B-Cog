@@ -1,0 +1,143 @@
+{
+	"elements": [
+		{
+			"type": "Contour",
+			"name": "Contour",
+			"children": [
+				{
+					"type": "Contour",
+					"name": "MainContour",
+					"children": [
+						{
+							"type": "ReferenceImage",
+							"name": "Reference",
+							"children": [],
+							"components": [],
+							"source": "D:/DATA/Games/animator/test/hands_sketch.png",
+							"offset": [
+								0.0,
+								0.0
+							],
+							"scale": [
+								1.0,
+								1.0
+							]
+						}
+					],
+					"components": [
+						{
+							"type": "Fill",
+							"color": "#ff0000ff"
+						}
+					],
+					"points": [
+						[
+							0.0,
+							0.0,
+							10.0,
+							40.0,
+							40.0,
+							40.0,
+							50.0,
+							0.0
+						],
+						[
+							50.0,
+							0.0,
+							60.0,
+							-40.0,
+							90.0,
+							-40.0,
+							100.0,
+							0.0
+						],
+						[
+							100.0,
+							0.0,
+							110.0,
+							40.0,
+							140.0,
+							0.0,
+							150.0,
+							0.0
+						],
+						[
+							200.0,
+							200.0,
+							210.0,
+							160.0,
+							240.0,
+							160.0,
+							250.0,
+							200.0
+						],
+						[
+							300.0,
+							0.0,
+							310.0,
+							30.0,
+							330.0,
+							30.0,
+							340.0,
+							0.0
+						],
+						[
+							340.0,
+							0.0,
+							350.0,
+							-30.0,
+							370.0,
+							-30.0,
+							380.0,
+							0.0
+						]
+					],
+					"color": "#0b0b0bff",
+					"width": 4.0
+				}
+			],
+			"components": [],
+			"points": [],
+			"color": "#000000ff",
+			"width": 1.0
+		}
+	],
+	"animation": {
+		"Contour/MainContour/Reference:scale": [
+			{
+				"t": 0.0,
+				"v": [
+					1.0,
+					1.0
+				]
+			},
+			{
+				"t": 10.0,
+				"v": [
+					3.0,
+					3.0
+				]
+			}
+		],
+		"Contour/MainContour/Reference:offset:x": [
+			{
+				"t": 10.0,
+				"v": 0.0
+			},
+			{
+				"t": 15.0,
+				"v": -50.0
+			}
+		],
+		"Contour/MainContour::Fill:color": [
+			{
+				"t": 0.0,
+				"v": "#ff0000ff"
+			},
+			{
+				"t": 24.0,
+				"v": "#00ff00ff"
+			}
+		]
+	}
+}

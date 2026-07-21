@@ -1,0 +1,99 @@
+[gd_scene format=3 uid="uid://4owbaowcrlpb"]
+
+[ext_resource type="Script" uid="uid://c8y3wlfehgsqv" path="res://ui/canvas_area.gd" id="1_d0bqo"]
+[ext_resource type="Script" uid="uid://bbems7xk5th8w" path="res://ui/scene_tree.gd" id="1_fx2qn"]
+
+[node name="Editor" type="Control" unique_id=1846843988]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="ColorRect" parent="." unique_id=1384688649]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.078431375, 0.078431375, 0.078431375, 1)
+
+[node name="ViewportSplit" type="HSplitContainer" parent="." unique_id=2041364095]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offsets = PackedInt32Array(300, -300)
+drag_nested_intersections = true
+split_offset = 300
+
+[node name="FileSystemSplit" type="VSplitContainer" parent="ViewportSplit" unique_id=1086089925]
+layout_mode = 2
+
+[node name="SceneTree" type="Panel" parent="ViewportSplit/FileSystemSplit" unique_id=1899462184]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("1_fx2qn")
+
+[node name="Tree" type="Tree" parent="ViewportSplit/FileSystemSplit/SceneTree" unique_id=1583562891]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+allow_search = false
+auto_tooltip = false
+scroll_horizontal_enabled = false
+
+[node name="FileSystem" type="Panel" parent="ViewportSplit/FileSystemSplit" unique_id=714370789]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Tree" type="Tree" parent="ViewportSplit/FileSystemSplit/FileSystem" unique_id=2021170401]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+allow_search = false
+auto_tooltip = false
+scroll_horizontal_enabled = false
+
+[node name="TimelineSplit" type="VSplitContainer" parent="ViewportSplit" unique_id=965331285]
+layout_mode = 2
+size_flags_horizontal = 3
+split_offsets = PackedInt32Array(746)
+split_offset = 746
+
+[node name="CanvasArea" type="Control" parent="ViewportSplit/TimelineSplit" unique_id=1067180508]
+layout_mode = 2
+script = ExtResource("1_d0bqo")
+
+[node name="ViewportContainer" type="SubViewportContainer" parent="ViewportSplit/TimelineSplit/CanvasArea" unique_id=280082076]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="Timeline" type="Panel" parent="ViewportSplit/TimelineSplit" unique_id=748401700]
+layout_mode = 2
+
+[node name="Inspector" type="Panel" parent="ViewportSplit" unique_id=2000428105]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ViewportSplit/Inspector" unique_id=718824596]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
