@@ -11,7 +11,9 @@
 - Make keyframes in Timeline moveable / deletable
 
 ### App features
-- Contour draw / delete tool
+/ Contour draw tool
+- Contour delete tool
+- Auto-key toggle
 - Contour Fill Component
 - 3D Shapes
 - Outline Component for 3D Shapes

@@ -2,8 +2,7 @@
 extends Element
 class_name Contour
 
-@export var points : Array = []
-var segment_points : Array[Array] = []
+@export var points : PackedVector2Array = []
 @export var color : Color = Color.BLACK : 
 	set(v):
 		color = v
@@ -16,37 +15,29 @@ var segment_points : Array[Array] = []
 var line_segments : Array[Line2D] = []
 
 func _setup() -> void:
-	var seg_id : int = 0
-	segment_points = [[]]
-	for pts in points:
-		var a : Vector2 = Vector2(pts[0], pts[1])
-		var b : Vector2 = Vector2(pts[2], pts[3])
-		var c : Vector2 = Vector2(pts[4], pts[5])
-		var d : Vector2 = Vector2(pts[6], pts[7])
-		
-		segment_points[seg_id].append_array([a, b, c, d])
-		segment_points.append([])
-		seg_id += 1
-	segment_points.pop_back()
-	
 	draw_segmented_curve()
 
 func draw_segmented_curve() -> void:
-	for line in line_segments:
-		line.queue_free()
-	line_segments.clear()
+	# Update amount of line segments
+	while line_segments.size() * 4 > points.size():
+		var i : int = line_segments.size() - 1
+		line_segments[i].queue_free()
+		line_segments.remove_at(i)
+	while line_segments.size() * 4 < points.size():
+		var new_line : Line2D = Line2D.new()
+		new_line.width = width
+		new_line.default_color = color
+		new_line.begin_cap_mode = Line2D.LINE_CAP_ROUND
+		new_line.end_cap_mode = Line2D.LINE_CAP_ROUND
+		line_segments.append(new_line)
+		add_child(new_line)
 	
-	for seg in segment_points:
-		if seg.size() < 4:
-			continue
-		var line : Line2D = Line2D.new()
-		line.points = bezier_to_polyline(seg[0], seg[1], seg[2], seg[3])
+	var i : int = 0
+	for line in line_segments:
 		line.width = width
 		line.default_color = color
-		line.begin_cap_mode = Line2D.LINE_CAP_ROUND
-		line.end_cap_mode = Line2D.LINE_CAP_ROUND
-		add_child(line)
-		line_segments.append(line)
+		line.points = bezier_to_polyline(points[i + 0], points[i + 1], points[i + 2], points[i + 3])
+		i += 4
 
 
 func bezier_to_polyline(a : Vector2, b : Vector2, c : Vector2, d : Vector2) -> Array[Vector2]:
@@ -88,3 +79,6 @@ func de_casteljau_split(p0: Vector2, p1: Vector2, p2: Vector2, p3: Vector2) -> A
 		[p0, p01, p012, p0123],   # first half
 		[p0123, p123, p23, p3]    # second half
 	]
+
+func _process(_delta : float) -> void:
+	draw_segmented_curve()

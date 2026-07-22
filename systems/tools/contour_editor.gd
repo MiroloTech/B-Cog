@@ -3,9 +3,7 @@ extends Tool
 class_name ContourEditor
 
 var dragging_point_idx : int = -1
-var dragging_segment_idx : int = -1
 var focused_point_idx : int = -1
-var focused_segment_idx : int = -1
 const DRAG_DIST : float = 5.0
 
 func get_dependencies() -> Array[String]:
@@ -13,23 +11,24 @@ func get_dependencies() -> Array[String]:
 
 func _draw() -> void:
 	if element is Contour:
-		var segments : Array[Array] = element.segment_points
-		var sid : int = 0
-		for segment in segments:
-			if sid == focused_segment_idx:
-				draw_polyline(scene2world_arr(segment), Color.ORANGE_RED, 1.0)
-			else:
-				draw_polyline(scene2world_arr(segment), Color.ORANGE, 1.0)
+		var i : int = 0
+		for _i in (element.points.size() / 4):
+			var a : Vector2 = element.points[i + 0]
+			var b : Vector2 = element.points[i + 1]
+			var c : Vector2 = element.points[i + 2]
+			var d : Vector2 = element.points[i + 3]
 			
-			var i : int = 0
-			for point in segment:
-				if i == focused_point_idx and sid == focused_segment_idx:
-					draw_circle(scene2world(point), 7.0, Color.RED)
-					draw_circle(scene2world(point), 5.0, Color.YELLOW)
-				else:
-					draw_circle(scene2world(point), 5.0, Color.YELLOW)
-				i += 1
-			sid += 1
+			# Draw Arms
+			draw_line(scene2world(a), scene2world(b), Color.CORAL, 1.0, true)
+			draw_line(scene2world(c), scene2world(d), Color.CORAL, 1.0, true)
+			
+			# Draw Points
+			draw_circle(scene2world(a), DRAG_DIST * 0.5, Color.GREEN_YELLOW, true, -1, true)
+			draw_circle(scene2world(b), DRAG_DIST * 0.5, Color.GREEN_YELLOW, true, -1, true)
+			draw_circle(scene2world(c), DRAG_DIST * 0.5, Color.GREEN_YELLOW, true, -1, true)
+			draw_circle(scene2world(d), DRAG_DIST * 0.5, Color.GREEN_YELLOW, true, -1, true)
+			
+			i += 4
 
 func _input(event : InputEvent) -> void:
 	if element is not Contour:
@@ -39,22 +38,15 @@ func _input(event : InputEvent) -> void:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
 				focused_point_idx = -1
-				focused_segment_idx = -1
-				var sid : int = 0
-				for segment in element.segment_points:
-					var i : int = 0
-					for p in segment:
-						var dist : float = world2scene(get_global_mouse_position()).distance_squared_to(p)
-						if dist <= DRAG_DIST * DRAG_DIST:
-							dragging_segment_idx = sid
-							dragging_point_idx = i
-							focused_segment_idx = sid
-							focused_point_idx = i
-						i += 1
-					sid += 1
+				for i in element.points.size():
+					var p : Vector2 = element.points[i]
+					var dist : float = world2scene(get_global_mouse_position()).distance_squared_to(p)
+					if dist <= DRAG_DIST * DRAG_DIST:
+						dragging_point_idx = i
+						focused_point_idx = i
 			else:
 				dragging_point_idx = -1
 	
 	if event is InputEventMouseMotion and dragging_point_idx > -1:
-		element.segment_points[dragging_segment_idx][dragging_point_idx] = world2scene(get_global_mouse_position())
+		element.points[dragging_point_idx] = world2scene(get_global_mouse_position())
 		element.draw_segmented_curve()

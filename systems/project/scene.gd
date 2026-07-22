@@ -93,6 +93,11 @@ func set_instance_data(instance : Object, tag : String, value : Variant) -> void
 		instance.set(tag, Vector3(value[0], value[1], value[2]))
 	elif instance.get(tag) is Color:
 		instance.set(tag, Color.from_string(str(value), Color.DEEP_PINK))
+	elif instance.get(tag) is PackedVector2Array:
+		var data : PackedVector2Array = PackedVector2Array([])
+		for v in value:
+			data.append(Vector2(v[0], v[1]))
+		instance.set(tag, data)
 	else:
 		instance.set(tag, value)
 
@@ -109,13 +114,20 @@ func add_anim_track(target : String, data : Array) -> void:
 		var t : int = key.t
 		var v : Variant = key.v
 		if v is Array:
-			if v.size() == 2:
+			if v.size() > 0:
+				if v[0] is Array:
+					if v[0].size() == 2:
+						var arr : PackedVector2Array = PackedVector2Array([])
+						for value in v:
+							arr.append(Vector2(value[0], value[1]))
+						v = arr as PackedVector2Array
+			elif v.size() == 2:
 				v = Vector2(v[0], v[1])
 			elif v.size() == 3:
 				v = Vector3(v[0], v[1], v[2])
 			elif v.size() == 4:
 				v = Vector4(v[0], v[1], v[2], v[3])
-		if v is String:
+		elif v is String:
 			if v.begins_with("#"):
 				v = Color.from_string(v, Color.DEEP_PINK)
 		animation.track_insert_key(track_id, t, v)
@@ -248,6 +260,11 @@ func store_json_data(data : Dictionary, tag : String, value : Variant) -> void:
 		data[tag] = [value.x, value.y, value.z, value.w]
 	elif value is Color:
 		data[tag] = "#" + value.to_html()
+	elif value is PackedVector2Array:
+		var array_data : Array[Array] = []
+		for v in value:
+			array_data.append([v.x, v.y])
+		data[tag] = array_data
 	else:
 		data[tag] = value
 
